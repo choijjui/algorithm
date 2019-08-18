@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * number 이하의 소수 구하기
+     * @param number
+     * @returns {any[]}
+     */
+    function getPrime(number) {
+        // 배열 초기화
+        let results = Array(number).fill(true);
+        for (let i = 2; i * i < number; i++) {
+            if (results[i])
+                for (let j = i * i; j < number; j += i) {
+                    results[j] = false;
+                }
+        }
+
+        return results;
+    }
+
+    function solution(number) {
+        // 입력받은 숫자 이하의 소수 구하기
+        let isPrime = getPrime(number);
+        let answer = 0;
+        for (; ;) {
+            let ok = false;
+            if (number == 0)
+                break;
+
+            // i와 입력받은 number-i가 소수 여부를 판별해서 answer값 확인
+            for (let i = 2; i <= number / 2; i++) {
+                if (isPrime[i] && isPrime[number - i]) {
+                    answer++;
+                    ok = true;
+                }
+            }
+            if (ok) {
+                break;
+            }
+        }
+        return answer;
+    }
+
+</script>
+<div class="problem-statement flex ng-scope" ng-if="statusData.selectedProblem" style="">
+    <h2><span class="task-number ng-binding">2/3</span>
+        <span class="task-title ng-binding">골드바흐의 추측</span></h2>
+    <div class="stage-task-content">
+        <div class="banner-box ng-scope">
+            <span class="col-md-6 align-center ng-binding">시간 제한 : 2초</span>
+            <span class="col-md-6 align-center ng-binding">메모리 제한 : 256MB</span>
+        </div>
+        <h3>문제 설명</h3>
+        <div class="detail" bind-html-compiled="statusData.selectedProblem.parsedBodyHtml"><p class="ng-scope">소수는 1과 자기 자신으로밖에 나누어지지 않는 정수이다.<br>미해결 문제인 골드바흐의 추측은 2보다 큰 모든 짝수는 두개의 소수의 합으로 표시할 수 있다는 것이다.<br><br>우리는 이 추측을 연구해보려고 한다.<br>2보다 큰 어떤 짝수 <span style="font-weight: 600;" class="ng-binding">int number</span>가 두개의 소수의 합으로 표시가 가능하다면,<br>표현 할 수 있는 갯수를 리턴하시오. 표현할 수 없다면, -1을 리턴하시오.<br><br>이때 하나의 소수를 두번 사용하는 것은 허용된다.</p></div>
+        <h3>참고 / 제약 사항</h3>
+        <ul class="ng-scope task-constraints">
+            <!-- ngRepeat: constraint in statusData.selectedProblem.constraints --><li ng-repeat="constraint in statusData.selectedProblem.constraints" ng-bind-html="constraint.value" class="ng-binding ng-scope" style="">number는 항상 짝수이다.</li><!-- end ngRepeat: constraint in statusData.selectedProblem.constraints --><li ng-repeat="constraint in statusData.selectedProblem.constraints" ng-bind-html="constraint.value" class="ng-binding ng-scope">4 &lt;= number &lt;= 100,000</li><!-- end ngRepeat: constraint in statusData.selectedProblem.constraints -->
+        </ul>
+        <h3>테스트 케이스</h3>
+        <ol id="task-sample">
+            <!-- ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope" style="">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int number =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->4<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!-- ngIf: name -->
+                <!-- ngIf: type.startsWith('list') -->
+                <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->1<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></span>
+            <!-- ngIf: testCase.description && testCase.description.length > 0 --><div class="testCase-description well ng-binding ng-scope" ng-if="testCase.description &amp;&amp; testCase.description.length > 0" ng-bind-html="testCase.description"><p>2 + 2 = 4 이므로 1가지가 있다.</p></div><!-- end ngIf: testCase.description && testCase.description.length > 0 -->
+        </li><!-- end ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int number =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->6<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!-- ngIf: name -->
+                <!-- ngIf: type.startsWith('list') -->
+                <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->1<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></span>
+            <!-- ngIf: testCase.description && testCase.description.length > 0 --><div class="testCase-description well ng-binding ng-scope" ng-if="testCase.description &amp;&amp; testCase.description.length > 0" ng-bind-html="testCase.description"><p>3 + 3 = 6 이므로 1가지가 있다.</p></div><!-- end ngIf: testCase.description && testCase.description.length > 0 -->
+        </li><!-- end ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int number =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->10<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!-- ngIf: name -->
+                <!-- ngIf: type.startsWith('list') -->
+                <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->2<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></span>
+            <!-- ngIf: testCase.description && testCase.description.length > 0 --><div class="testCase-description well ng-binding ng-scope" ng-if="testCase.description &amp;&amp; testCase.description.length > 0" ng-bind-html="testCase.description"><p>10은 3 + 7 과 5 + 5로 표현이 가능하다.</p></div><!-- end ngIf: testCase.description && testCase.description.length > 0 -->
+        </li><!-- end ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int number =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->648<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!-- ngIf: name -->
+                <!-- ngIf: type.startsWith('list') -->
+                <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->27<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></span>
+            <!-- ngIf: testCase.description && testCase.description.length > 0 -->
+        </li><!-- end ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int number =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->3570<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!— ngIf: name —>
+<!— ngIf: type.startsWith('list') —>
+<!— ngIf: !type.startsWith('list') —><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!— ngIf: type==='string' —>154<!— ngIf: type==='string' —>
+</span><!— end ngIf: !type.startsWith('list') —></span>
+            <!— ngIf: testCase.description && testCase.description.length > 0 —>
+        </li><!— end ngRepeat: testCase in statusData.selectedProblem.testCaseData —>
+        </ol>
+    </div>
+</div>
+
+</body>
+</html>

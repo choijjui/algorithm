@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function solution2(weakFinger, maxCount) {
+        let answer = 0;
+        let index = 1;
+        // 루틴의 순서가 내림차순인지 오름차순인지의 flag 값
+        let isDescending = false;
+
+        // maxCount가 0에 도달할때까지 무한루프를 사용
+        for (; ;) {
+            if (weakFinger == index) {
+                if (maxCount == 0) {
+                    break;
+                } else {
+                    maxCount--;
+                }
+            }
+
+            // i 의 값이 1,5에 따라 flag 값 변경
+            if (index == 5) isDescending = true;
+            if (index == 1) isDescending = false;
+
+            if (!isDescending) {
+                index++;
+            } else {
+                index--;
+            }
+
+            answer++;
+        }
+
+        return answer;
+    }
+</script>
+
+<div class="problem-statement flex ng-scope" ng-if="statusData.selectedProblem" style="">
+    <h2><span class="task-number ng-binding">1/3</span>
+        <span class="task-title ng-binding">숫자 세기</span></h2>
+    <div class="stage-task-content">
+        <div class="banner-box ng-scope">
+            <span class="col-md-6 align-center ng-binding">시간 제한 : 2초</span>
+            <span class="col-md-6 align-center ng-binding">메모리 제한 : 256MB</span>
+        </div>
+        <h3>문제 설명</h3>
+        <div class="detail" bind-html-compiled="statusData.selectedProblem.parsedBodyHtml"><p class="ng-scope">당신의 귀여운 어린 조카는 손가락으로 숫자를 센다. 숫자를 셀때 엄지손가락 부터 시작해서 새끼 손가락까지 접어가면서 숫자를 세는데 새끼손가락을 접고나면 다시 새끼손가락 부터 반대로 손가락을 하나씩 펴는 방식으로 숫자를 센다. 당신의 조카는 집념이 강하기 때문에 원하는 숫자를 셀때까지 멈추지 않는다. 하지만 당신의 조카가 손가락 한개를 다쳤다. 그래서 제한된 횟수 <span style="font-weight: 600;" class="ng-binding">int maxCount</span> 횟수만 해당 손가락을 사용할 수 있다. 엄지부터 새끼손가락을 1부터 5로 표현했을때, <span style="font-weight: 600;" class="ng-binding">int weakFinger</span>는 아픈 손가락을 나타낸다. <br>당신의 조카가 셀수 있는 가장 큰 숫자를 리턴하시오.</p></div>
+        <h3>참고 / 제약 사항</h3>
+        <ul class="ng-scope task-constraints">
+            <!-- ngRepeat: constraint in statusData.selectedProblem.constraints --><li ng-repeat="constraint in statusData.selectedProblem.constraints" ng-bind-html="constraint.value" class="ng-binding ng-scope">1 &lt;= weakFinger &lt;= 5
+            0 &lt;= maxCount &lt;= 100,000</li><!-- end ngRepeat: constraint in statusData.selectedProblem.constraints -->
+        </ul>
+        <h3>테스트 케이스</h3>
+        <ol id="task-sample">
+            <!-- ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int weakFinger =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->2<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int maxCount =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->3<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!-- ngIf: name -->
+                <!-- ngIf: type.startsWith('list') -->
+                <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->15<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></span>
+            <!-- ngIf: testCase.description && testCase.description.length > 0 --><div class="testCase-description well ng-binding ng-scope" ng-if="testCase.description &amp;&amp; testCase.description.length > 0" ng-bind-html="testCase.description"><p>처음 15개의 숫자는 1,2,3,4,5,4,3,2,1,2,3,4,5,4,3 이렇게 셀수 있다. 다음은 2번째 손가락을 사용할 차례이지만 이미 3번의 횟수를 모두 사용했기 때문에 더이상 사용할 수 없다.</p></div><!-- end ngIf: testCase.description && testCase.description.length > 0 -->
+        </li><!-- end ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int weakFinger =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->1<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int maxCount =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->0<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!-- ngIf: name -->
+                <!-- ngIf: type.startsWith('list') -->
+                <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->0<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></span>
+            <!-- ngIf: testCase.description && testCase.description.length > 0 --><div class="testCase-description well ng-binding ng-scope" ng-if="testCase.description &amp;&amp; testCase.description.length > 0" ng-bind-html="testCase.description"><p>숫자를 셀때 엄지손가락을 사용해야하는데 사용할 수 없으므로 숫자를 셀수 없다. 정답은 0이다.</p></div><!-- end ngIf: testCase.description && testCase.description.length > 0 -->
+        </li><!-- end ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int weakFinger =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->5<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int maxCount =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->0<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!-- ngIf: name -->
+                <!-- ngIf: type.startsWith('list') -->
+                <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->4<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></span>
+            <!-- ngIf: testCase.description && testCase.description.length > 0 --><div class="testCase-description well ng-binding ng-scope" ng-if="testCase.description &amp;&amp; testCase.description.length > 0" ng-bind-html="testCase.description"><p>새끼손가락을 전혀사용할 수 없기때문에 4까지 셀수있다.</p></div><!-- end ngIf: testCase.description && testCase.description.length > 0 -->
+        </li><!-- end ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int weakFinger =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->2<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int maxCount =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->48<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!-- ngIf: name -->
+                <!-- ngIf: type.startsWith('list') -->
+                <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->193<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></span>
+            <!-- ngIf: testCase.description && testCase.description.length > 0 -->
+        </li><!-- end ngRepeat: testCase in statusData.selectedProblem.testCaseData --><li ng-repeat="testCase in statusData.selectedProblem.testCaseData" class="ng-scope">
+            <!-- ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int weakFinger =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->5<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams --><div ng-repeat="param in statusData.selectedProblem.inputParams" style="margin-bottom: 5px;" name="param.name" type="param.type" parameter-display="testCase.i[$index]" language="statusData.recentExamData.language.name" class="ng-scope ng-isolate-scope"><!-- ngIf: name --><span ng-if="name" class="ng-binding ng-scope">int maxCount =</span><!-- end ngIf: name -->
+            <!-- ngIf: type.startsWith('list') -->
+            <!-- ngIf: !type.startsWith('list') --><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!-- ngIf: type==='string' -->973<!-- ngIf: type==='string' -->
+</span><!-- end ngIf: !type.startsWith('list') --></div><!-- end ngRepeat: param in statusData.selectedProblem.inputParams -->
+            <span>리턴(정답):</span>
+            <span type="statusData.selectedProblem.outputParam.type" parameter-display="testCase.o" language="statusData.recentExamData.language.name" class="ng-isolate-scope"><!— ngIf: name —>
+<!— ngIf: type.startsWith('list') —>
+<!— ngIf: !type.startsWith('list') —><span ng-if="!type.startsWith('list')" class="ng-binding ng-scope">
+    <!— ngIf: type==='string' —>7788<!— ngIf: type==='string' —>
+</span><!— end ngIf: !type.startsWith('list') —></span>
+            <!— ngIf: testCase.description && testCase.description.length > 0 —>
+        </li><!— end ngRepeat: testCase in statusData.selectedProblem.testCaseData —>
+        </ol>
+    </div>
+</div>
+
+</body>
+</html>
